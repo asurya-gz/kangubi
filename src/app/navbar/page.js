@@ -10,9 +10,9 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Sidebar */}
+      {/* Sidebar hanya muncul di mode mobile */}
       <div
-        className={`fixed top-0 right-0 w-64 h-full bg-[#f8f4f1] shadow-lg transform ${
+        className={`fixed top-0 right-0 w-64 h-full bg-[#f8f4f1] shadow-lg transform lg:hidden ${
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 ease-in-out`}
         style={{ zIndex: 60 }} // Z-index untuk sidebar
@@ -51,6 +51,13 @@ export default function Navbar() {
           >
             Menu
           </Link>
+          <Link
+            href="#nonmakanan"
+            className="text-[#333] px-4 py-2 hover:bg-[#e2d8d0] block"
+            onClick={toggleSidebar}
+          >
+            Non-Makanan
+          </Link>
           <a
             href="https://wa.me/+6285776130245?text=Hallo%20Kang%20Ubi"
             className="text-[#333] px-4 py-2 hover:bg-[#e2d8d0] block border border-[#333] rounded-full text-center"
@@ -75,6 +82,31 @@ export default function Navbar() {
             />
             <span className="text-white text-2xl font-display">Kang Ubi</span>
           </div>
+          {/* Menu di desktop */}
+          <div className="hidden lg:flex space-x-8 font-display text-lg">
+            <Link href="#home" className="text-white hover:text-[#e2d8d0] px-4">
+              Home
+            </Link>
+            <Link href="#menu" className="text-white hover:text-[#e2d8d0] px-4">
+              Menu
+            </Link>
+            <Link
+              href="#nonmakanan"
+              className="text-white hover:text-[#e2d8d0] px-4"
+            >
+              Non-Makanan
+            </Link>
+            <a
+              href="https://wa.me/+6285776130245?text=Hallo%20Kang%20Ubi"
+              className="text-white hover:text-[#e2d8d0] border border-white rounded-full px-4 py-1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Contact
+            </a>
+          </div>
+
+          {/* Tombol menu untuk mobile */}
           <button className="text-white lg:hidden" onClick={toggleSidebar}>
             <svg
               className="w-6 h-6"

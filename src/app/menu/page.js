@@ -35,6 +35,12 @@ export default function Menu() {
       image: "/peyeum.jpg",
     },
     {
+      id: 7,
+      name: "Peyeum Bandung 1/2 kg",
+      price: "Rp 9.000",
+      image: "/peyeum.jpg",
+    },
+    {
       id: 4,
       name: "Strawberry Segar",
       price: "Coming Soon",
@@ -59,11 +65,13 @@ export default function Menu() {
   };
 
   return (
-    <div className="p-6 md:p-12 lg:p-16 flex flex-col items-center">
-      <h1 className="text-3xl font-bold mb-6 text-[#d7a98c]">Menu Jastip</h1>
+    <div className="p-6 md:p-12 lg:p-16 flex flex-col items-center font-display">
+      <h1 className="text-3xl font-display font-bold mb-6 text-[#d7a98c]">
+        Menu Jastip
+      </h1>
 
       {/* Kotak Pencarian */}
-      <div className="w-full max-w-md mb-8">
+      <div className="w-full max-w-md mb-8 font-display">
         <input
           type="text"
           placeholder="Cari produk..."
@@ -75,7 +83,7 @@ export default function Menu() {
 
       {/* Catatan Menarik */}
       <div className="bg-[#f5f5f5] p-4 rounded-lg shadow-md max-w-md mb-8">
-        <p className="text-sm font-semibold text-[#d7a98c]">
+        <p className="text-sm font-display font-semibold text-[#d7a98c]">
           Ongkir Jastip seluruh area Tembalang Banyumanik hanya Rp 6.000
         </p>
       </div>

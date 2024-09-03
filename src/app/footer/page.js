@@ -12,21 +12,26 @@ export default function Footer() {
     <footer className="bg-[#d7a98c] text-white py-8 mt-12">
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
         {/* Bagian Kiri */}
-        <div className="mb-6 md:mb-0">
-          <h2 className="text-2xl font-bold">Kang Ubi</h2>
-          <p className="mt-2">
+        <div className="mb-6 md:mb-0 font-display">
+          <h2 className="text-2xl font-bold font-display">Kang Ubi</h2>
+          <p className="mt-2 font-display">
             Jasa Titip (Jastip) Ubi Cilembu dan Produk Lokal
           </p>
-          <p className="mt-1">Tembalang, Banyumanik, Semarang, Indonesia</p>
+          <p className="mt-1 font-display">
+            Tembalang, Banyumanik, Semarang, Indonesia
+          </p>
         </div>
 
         {/* Tautan Navigasi */}
-        <div className="flex space-x-6 mb-6 md:mb-0">
+        <div className="flex space-x-6 mb-6 md:mb-0 font-display">
           <Link href="#home" className="hover:underline">
             Home
           </Link>
           <Link href="#menu" className="hover:underline">
             Menu
+          </Link>
+          <Link href="/nonmakanan" className="hover:underline">
+            Non-Makanan
           </Link>
           <a
             href="https://wa.me/+6285776130245?text=Hallo%20Kang%20Ubi"
@@ -72,7 +77,7 @@ export default function Footer() {
       </div>
 
       {/* Informasi Tambahan */}
-      <div className="container mx-auto px-4 mt-8 border-t border-white pt-4 text-center">
+      <div className="container mx-auto px-4 mt-8 border-t border-white pt-4 text-center font-display">
         <p>&copy; 2024 Kang Ubi. All rights reserved.</p>
       </div>
     </footer>
