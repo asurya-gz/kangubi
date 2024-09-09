@@ -5,8 +5,10 @@ import Link from "next/link";
 
 export default function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
     <>
@@ -52,21 +54,41 @@ export default function Navbar() {
             Menu
           </Link>
           <Link
-            href="#nonmakanan"
+            href="/nonmakanan"
             className="text-[#333] px-4 py-2 hover:bg-[#e2d8d0] block"
             onClick={toggleSidebar}
           >
             Non-Makanan
           </Link>
-          <a
-            href="https://wa.me/+6285776130245?text=Hallo%20Kang%20Ubi"
-            className="text-[#333] px-4 py-2 hover:bg-[#e2d8d0] block border border-[#333] rounded-full text-center"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={toggleSidebar}
-          >
-            Contact
-          </a>
+          {/* Dropdown Contact & Survey untuk Mobile */}
+          <div className="relative">
+            <button
+              onClick={toggleDropdown}
+              className="text-[#333] px-4 py-2 hover:bg-[#e2d8d0] block border border-[#333] rounded-full text-center"
+            >
+              Contact & Survey
+            </button>
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg">
+                <a
+                  href="https://wa.me/+6285776130245?text=Hallo%20Kang%20Ubi"
+                  className="block px-4 py-2 text-[#333] hover:bg-[#e2d8d0] hover:text-white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={toggleSidebar}
+                >
+                  Contact
+                </a>
+                <Link
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSe3RGEuAqJ51_wBIMQTDd9n2CoaOz2AdzqRgko379rFi8NT8g/viewform?usp=sf_link"
+                  className="block px-4 py-2 text-[#333] hover:bg-[#e2d8d0] hover:text-white"
+                  onClick={toggleSidebar}
+                >
+                  Survey
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -91,19 +113,38 @@ export default function Navbar() {
               Menu
             </Link>
             <Link
-              href="#nonmakanan"
+              href="/nonmakanan"
               className="text-white hover:text-[#e2d8d0] px-4"
             >
               Non-Makanan
             </Link>
-            <a
-              href="https://wa.me/+6285776130245?text=Hallo%20Kang%20Ubi"
-              className="text-white hover:text-[#e2d8d0] border border-white rounded-full px-4 py-1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Contact
-            </a>
+            {/* Dropdown Contact & Survey untuk Desktop */}
+            <div className="relative">
+              <button
+                onClick={toggleDropdown}
+                className="text-white hover:text-[#e2d8d0] border border-white rounded-full px-4 py-1"
+              >
+                Contact & Survey
+              </button>
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg">
+                  <a
+                    href="https://wa.me/+6285776130245?text=Hallo%20Kang%20Ubi"
+                    className="block px-4 py-2 text-[#333] hover:bg-[#e2d8d0] hover:text-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Contact
+                  </a>
+                  <Link
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSe3RGEuAqJ51_wBIMQTDd9n2CoaOz2AdzqRgko379rFi8NT8g/viewform?usp=sf_link"
+                    className="block px-4 py-2 text-[#333] hover:bg-[#e2d8d0] hover:text-white"
+                  >
+                    Survey
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Tombol menu untuk mobile */}

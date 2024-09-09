@@ -3,54 +3,57 @@ import React, { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 
 export default function Menu() {
+  // Produk yang dikelompokkan berdasarkan nama dengan pilihan ukuran
   const products = [
     {
       id: 1,
-      name: "Ubi Cilembu Matang 1Kg",
-      price: "Rp 23.000",
-      image: "/ubi.jpg",
+      name: "Ubi Cilembu Matang",
+      schedule: "Buka Setiap Hari",
+      sizes: [
+        { size: "1 Kg", price: "Rp 23.000", image: "/ubi.jpg" },
+        { size: "1/2 Kg", price: "Rp 12.000", image: "/ubi.jpg" },
+      ],
     },
     {
       id: 2,
-      name: "Ubi Cilembu Matang 1/2 Kg",
-      price: "Rp 12.000",
-      image: "/ubi.jpg",
-    },
-    {
-      id: 5,
-      name: "Ubi Cilembu Mentah 1 Kg",
-      price: "Rp 17.000",
-      image: "/mentah.png",
-    },
-    {
-      id: 6,
-      name: "Ubi Cilembu Mentah 1/2 Kg",
-      price: "Rp 9.000",
-      image: "/mentah.png",
+      name: "Ubi Cilembu Mentah",
+      schedule: "Buka Setiap Hari",
+      sizes: [
+        { size: "1 Kg", price: "Rp 17.000", image: "/mentah.png" },
+        { size: "1/2 Kg", price: "Rp 9.000", image: "/mentah.png" },
+      ],
     },
     {
       id: 3,
-      name: "Peyeum Bandung 1 kg",
-      price: "Rp 17.000",
-      image: "/peyeum.jpg",
-    },
-    {
-      id: 7,
-      name: "Peyeum Bandung 1/2 kg",
-      price: "Rp 9.000",
-      image: "/peyeum.jpg",
+      name: "Peyeum Bandung",
+      schedule: "Buka Setiap Hari",
+      sizes: [
+        { size: "1 Kg", price: "Rp 17.000", image: "/peyeum.jpg" },
+        { size: "1/2 Kg", price: "Rp 9.000", image: "/peyeum.jpg" },
+      ],
     },
     {
       id: 4,
       name: "Strawberry Segar",
-      price: "Coming Soon",
-      image: "/stbry.jpeg",
+      schedule: "Setiap hari Kamis dan Minggu",
+      sizes: [
+        {
+          size: "Mika Kecil (4 mika)",
+          price: "Rp 10.000",
+          image: "/stbry.jpeg",
+        },
+        {
+          size: "Mika Besar (1 mika besar)",
+          price: "Rp 15.000",
+          image: "/stbry.jpeg",
+        },
+      ],
     },
-    // Tambahkan produk lainnya di sini
   ];
 
-  // State untuk menyimpan nilai pencarian
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedSize, setSelectedSize] = useState({});
+  const [showSizeOptions, setShowSizeOptions] = useState({});
 
   // Fungsi untuk memfilter produk berdasarkan nama
   const filteredProducts = products.filter((product) =>
@@ -58,10 +61,24 @@ export default function Menu() {
   );
 
   // Fungsi untuk membuat URL WhatsApp
-  const createWhatsAppURL = (productName) => {
+  const createWhatsAppURL = (productName, productSize) => {
     const phoneNumber = "+6285776130245";
-    const message = `Hallo kang ubi saya mau jastip ${productName}`;
+    const message = `Hallo kang ubi saya mau jastip ${productName} ukuran ${productSize}`;
     return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  };
+
+  // Fungsi untuk menangani klik tombol order
+  const handleOrderClick = (productId) => {
+    setShowSizeOptions((prevState) => ({
+      ...prevState,
+      [productId]: !prevState[productId],
+    }));
+  };
+
+  // Fungsi untuk mengatur ukuran yang dipilih dan membuka WhatsApp
+  const handleSizeSelect = (productId, productName, size) => {
+    setSelectedSize({ ...selectedSize, [productId]: size });
+    window.open(createWhatsAppURL(productName, size.size), "_blank");
   };
 
   return (
@@ -96,24 +113,45 @@ export default function Menu() {
             className="border border-gray-200 rounded-lg shadow-md p-4 flex flex-col items-center"
           >
             <img
-              src={product.image}
+              src={product.sizes[0].image}
               alt={product.name}
               className="w-full h-40 object-cover rounded-md mb-4"
             />
             <h2 className="text-xl font-semibold text-[#d7a98c]">
               {product.name}
             </h2>
-            <p className="text-gray-700">{product.price}</p>
+            <p className="text-gray-500 text-sm mb-2">{product.schedule}</p>
+            {product.sizes.map((size) => (
+              <p className="text-gray-700" key={size.size}>
+                {size.size}: {size.price}
+              </p>
+            ))}
+
             {/* Tombol Order */}
-            <a
-              href={createWhatsAppURL(product.name)}
+            <button
+              onClick={() => handleOrderClick(product.id)}
               className="mt-4 px-4 py-2 bg-[#d7a98c] text-white rounded-full flex items-center hover:bg-[#8f6246] transition duration-300"
-              target="_blank"
-              rel="noopener noreferrer"
             >
-              Order
+              Pilih Ukuran
               <IoIosArrowForward className="ml-2" />
-            </a>
+            </button>
+
+            {/* Opsi Ukuran */}
+            {showSizeOptions[product.id] && (
+              <div className="mt-2 flex flex-col items-center">
+                {product.sizes.map((size) => (
+                  <button
+                    key={size.size}
+                    onClick={() =>
+                      handleSizeSelect(product.id, product.name, size)
+                    }
+                    className="mt-1 px-2 py-1 bg-white border border-[#d7a98c] text-[#d7a98c] rounded-md hover:bg-[#d7a98c] hover:text-white transition duration-300"
+                  >
+                    {size.size}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
