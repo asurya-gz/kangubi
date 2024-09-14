@@ -13,6 +13,7 @@ export default function Menu() {
         { size: "1 Kg", price: "Rp 23.000", image: "/ubi.jpg" },
         { size: "1/2 Kg", price: "Rp 12.000", image: "/ubi.jpg" },
       ],
+      feeJastip: "Rp 6.000",
     },
     {
       id: 2,
@@ -22,6 +23,7 @@ export default function Menu() {
         { size: "1 Kg", price: "Rp 17.000", image: "/mentah.png" },
         { size: "1/2 Kg", price: "Rp 9.000", image: "/mentah.png" },
       ],
+      feeJastip: "Rp 6.000",
     },
     {
       id: 3,
@@ -31,23 +33,14 @@ export default function Menu() {
         { size: "1 Kg", price: "Rp 17.000", image: "/peyeum.jpg" },
         { size: "1/2 Kg", price: "Rp 9.000", image: "/peyeum.jpg" },
       ],
+      feeJastip: "Rp 6.000",
     },
     {
       id: 4,
-      name: "Strawberry Segar",
-      schedule: "Setiap hari Kamis dan Minggu",
-      sizes: [
-        {
-          size: "Mika Kecil (4 mika)",
-          price: "Rp 10.000",
-          image: "/stbry.jpeg",
-        },
-        {
-          size: "Mika Besar (1 mika besar)",
-          price: "Rp 15.000",
-          image: "/stbry.jpeg",
-        },
-      ],
+      name: "Nasi Goreng + Telur",
+      schedule: "Buka Setiap Hari",
+      sizes: [{ size: "1 Porsi", price: "Rp 13.000", image: "/nasgor.jpg" }],
+      feeJastip: "Rp 0",
     },
   ];
 
@@ -98,13 +91,6 @@ export default function Menu() {
         />
       </div>
 
-      {/* Catatan Menarik */}
-      <div className="bg-[#f5f5f5] p-4 rounded-lg shadow-md max-w-md mb-8">
-        <p className="text-sm font-display font-semibold text-[#d7a98c]">
-          Ongkir Jastip seluruh area Tembalang Banyumanik hanya Rp 6.000
-        </p>
-      </div>
-
       {/* Daftar Produk */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
         {filteredProducts.map((product) => (
@@ -120,11 +106,15 @@ export default function Menu() {
             <h2 className="text-xl font-semibold text-[#d7a98c]">
               {product.name}
             </h2>
-            <p className="text-gray-500 text-sm mb-2">{product.schedule}</p>
+            <p className="text-gray-500 text-sm">
+              Fee Jastip: {product.feeJastip}
+            </p>
             {product.sizes.map((size) => (
-              <p className="text-gray-700" key={size.size}>
-                {size.size}: {size.price}
-              </p>
+              <div key={size.size} className="text-center">
+                <p className="text-gray-700">
+                  {size.size}: {size.price}
+                </p>
+              </div>
             ))}
 
             {/* Tombol Order */}
